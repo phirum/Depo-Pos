@@ -8,7 +8,7 @@ import {TAPi18n} from 'meteor/tap:i18n';
 
 // Lib
 import '../../../client/components/loading.js';
-import '../../../client/components/tabular-action.js';
+import '../../../client/components/column-action.js';
 import '../../../client/components/form-footer.js';
 import {createNewAlertify} from '../../../client/libs/create-new-alertify.js';
 import {renderTemplate} from '../../../client/libs/render-template.js';
@@ -56,7 +56,7 @@ indexTmpl.events({
         destroyAction(
             Branch,
             {_id: this._id},
-            {title: TAPi18n.__('core.branch.title'), item: this._id}
+            {title: TAPi18n.__('core.branch.title'), itemTitle: this._id}
         );
     },
     'click .js-display' (event, instance) {
