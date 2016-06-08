@@ -16,7 +16,7 @@ import '../../core/imports/ui/layouts/main';
 
 // Group
 let PosRoutes = FlowRouter.group({
-    prefix: '/simple-pos',
+    prefix: '/pos',
     title: "POS",
     titlePrefix: 'POS > ',
     subscriptions: function (params, queryParams) {

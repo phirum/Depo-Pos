@@ -70,16 +70,10 @@
                 <dd>{{_id}}</dd>
                 <dt>{{_ (i18nLabel "name")}}</dt>
                 <dd>{{name}}</dd>
-                <dt>{{_ (i18nLabel "gender")}}</dt>
-                <dd>{{gender}}</dd>
-                <dt>{{_ (i18nLabel "dob")}}</dt>
-                <dd>{{moFormat dob "DD/MM/YYYY"}}</dd>
-                <dt>{{_ (i18nLabel "address")}}</dt>
-                <dd>{{address}}</dd>
-                <dt>{{_ (i18nLabel "telephone")}}</dt>
-                <dd>{{telephone}}</dd>
-                <dt>{{_ (i18nLabel "email")}}</dt>
-                <dd>{{email}}</dd>
+                <dt>{{_ (i18nLabel "description")}}</dt>
+                <dd>{{description}}</dd>
+                <dt>{{_ (i18nLabel "parent")}}</dt>
+                <dd>{{_parent.name}}</dd>
             </dl>
         {{/with}}
     {{else}}

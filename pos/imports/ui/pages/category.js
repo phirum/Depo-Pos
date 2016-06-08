@@ -63,7 +63,6 @@ indexTmpl.helpers({
         let i18nPrefix = 'pos.category.schema';
 
         reactiveTableSettings.collection = 'pos.reactiveTable.category';
-        reactiveTableSettings.filters = ['pos.categoryByBranchFilter'];
         reactiveTableSettings.fields = [
             {
                 key: '_id',
@@ -93,17 +92,36 @@ indexTmpl.helpers({
 
 indexTmpl.events({
     'click .js-create' (event, instance) {
+        Session.set('CategoryIdSession', null);
         alertify.category(fa('plus', TAPi18n.__('pos.category.title')), renderTemplate(newTmpl));
     },
     'click .js-update' (event, instance) {
+        Session.set('CategoryIdSession', this._id);
         alertify.category(fa('pencil', TAPi18n.__('pos.category.title')), renderTemplate(editTmpl, this));
     },
     'click .js-destroy' (event, instance) {
-        destroyAction(
-            Categories,
-            {_id: this._id},
-            {title: TAPi18n.__('pos.category.title'), itemTitle: this._id}
-        );
+        var id = this._id;
+        var arr = [
+         //   {collection: 'Products', selector: {categoryId: id}},
+            {collection: 'Categories', selector: {parentId: id}}
+        ];
+        Meteor.call('isRelationExist', arr, function (error, result) {
+            if (error) {
+                alertify.error(error.message);
+            } else {
+                if (result) {
+                    alertify.warning("Data has been used. Can't remove.");
+                } else {
+                    destroyAction(
+                        Categories,
+                        {_id: id},
+                        {title: TAPi18n.__('pos.category.title'), itemTitle: id}
+                    );
+                }
+            }
+        });
+
+
     },
     'click .js-display' (event, instance) {
         alertify.categoryShow(fa('eye', TAPi18n.__('pos.category.title')), renderTemplate(showTmpl, this));
